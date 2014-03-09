@@ -44,5 +44,6 @@ describe("binarySearchTree", function() {
     binarySearchTree.insert(3);
     binarySearchTree.insert(8);
     binarySearchTree.insert(1);
-    expect(binarySearchTree.breadthFirstLog()).to.equal([5,2,8,1,3]);  });
+    assert.notStrictEqual(binarySearchTree.breadthFirstLog(), [5,2,8,1,3]);
+  });
 });

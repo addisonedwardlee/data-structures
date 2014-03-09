@@ -51,40 +51,24 @@ var bstMethods = {
     }
   },
 
-  breadthFirstLog: function(results){
-    var results = results || [this.value];
+  breadthFirstLog: function(){
+    var results = [];
     var queue = [];
-    queue.unshift(this.value);
-    results = results.concat(queue.pop(this.value));
-    if(this.left){
-      queue.unshift(this.left.breadthFirstLog(results));
-    }
-    if(this.right){
-      queue.unshift(this.right.breadthFirstLog(results));
-    }
-
-    // enqueue root node
-    // dequeue node
-    // enqueue children of dequeued node
-    // place dequeued children into the results
-    // repeat
-
-    results.concat(this.value);
-
-    if (this.right) {
-      results = results.concat(this.right.value);
-    }
-
-    if (this.right) {
-      results = results.concat(this.right.breadthFirstLog());
-    }
+    var innerFunc = function(node){
+      results.push(node.value);
+      if(node.left){
+        queue.push(node.left);
+      }
+      if(node.right){
+        queue.push(node.right);
+      }
+      return;
+    };
+    innerFunc(this);
+    while(queue.length){
+      innerFunc(queue[0]);
+      queue.shift();
+    };
     return results;
   }
 };
-
-
-// [this.value]
-// run function on this array to add .value to new array
-// add this.left, add this.right
-// iterate over new things
-//
